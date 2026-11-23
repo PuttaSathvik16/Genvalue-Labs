@@ -6,6 +6,11 @@ Welcome to the official repository for **Genvalue Labs**.
 
 This repository hosts tools, libraries, and open-source experiments developed by Genvalue Labs.
 
+### 📌 Project Board & Roadmap
+
+Track active issues, sprint progress, and release milestones on our public board:
+👉 **[GenValue Labs Roadmap & Planning (Projects v2)](https://github.com/users/genvaluelabs-a11y/projects/2/views/1)**
+
 ---
 
 ## Features: Project Planning & Multi-Layout Views
