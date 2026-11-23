@@ -1,10 +1,10 @@
 export type LayoutType = 'table' | 'board' | 'roadmap';
 
-export type ItemStatus = 'Todo' | 'In Progress' | 'In Review' | 'Done';
+export type ItemStatus = 'Icebox' | 'Backlog' | 'In Progress' | 'In Review' | 'Done';
 
 export type ItemPriority = 'Low' | 'Medium' | 'High' | 'Urgent';
 
-export type ItemType = 'issue' | 'pull_request' | 'draft';
+export type ItemType = 'issue' | 'pull_request' | 'draft' | 'epic';
 
 export interface Assignee {
   name: string;
@@ -17,12 +17,13 @@ export interface ProjectItem {
   status: ItemStatus;
   priority: ItemPriority;
   type: ItemType;
+  epic?: string;
   assignee: Assignee;
   startDate: string; // YYYY-MM-DD
   targetDate: string; // YYYY-MM-DD
   iteration: string;
   labels: string[];
-  estimate: number;
+  estimate: number; // Story Points (1, 2, 3, 5, 8, 13)
 }
 
 export interface ViewConfig {
