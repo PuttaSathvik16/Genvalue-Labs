@@ -88,7 +88,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
             className="flex items-center space-x-1.5 px-3 py-1.5 text-sm font-medium text-white bg-[#238636] hover:bg-[#2ea043] rounded-md shadow-sm transition-colors"
           >
             <Plus className="w-4 h-4" />
-            <span>New item</span>
+            <span>New story</span>
           </button>
         </div>
       </div>
@@ -199,23 +199,23 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
         </div>
       </div>
 
-      {/* Search & Filter Toolbar */}
+      {/* Search & Filter Toolbar with 5 Agile Pipelines */}
       <div className="flex items-center justify-between py-3 border-t border-[#30363d]">
-        <div className="flex items-center space-x-3 w-full max-w-lg">
-          <div className="relative w-full">
+        <div className="flex items-center space-x-3 w-full max-w-xl">
+          <div className="relative w-64">
             <Search className="w-4 h-4 text-[#8b949e] absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Filter by title, assignee, or label..."
+              placeholder="Search stories, epics, labels..."
               value={searchQuery}
               onChange={e => onSearchChange(e.target.value)}
               className="w-full bg-[#0d1117] border border-[#30363d] rounded-md pl-9 pr-3 py-1 text-xs text-[#c9d1d9] placeholder-[#8b949e] focus:outline-none focus:border-[#58a6ff]"
             />
           </div>
 
-          {/* Quick status filter */}
-          <div className="flex items-center space-x-1 shrink-0">
-            {['All', 'Todo', 'In Progress', 'In Review', 'Done'].map(status => (
+          {/* Quick Agile Pipeline status filter */}
+          <div className="flex items-center space-x-1 shrink-0 overflow-x-auto scrollbar-none">
+            {['All', 'Icebox', 'Backlog', 'In Progress', 'In Review', 'Done'].map(status => (
               <button
                 key={status}
                 onClick={() => onStatusFilterChange(status)}
@@ -233,7 +233,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
 
         <div className="flex items-center text-xs text-[#8b949e] space-x-1">
           <SlidersHorizontal className="w-3.5 h-3.5" />
-          <span>GitHub Projects View Switcher Active</span>
+          <span>Agile Pipelines Active</span>
         </div>
       </div>
     </div>
