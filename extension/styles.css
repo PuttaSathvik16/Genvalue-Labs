@@ -8,7 +8,7 @@
 #gv-agile-repo-tab .gv-agile-tab-link {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 6px !important;
+  gap: 8px !important;
   text-decoration: none !important;
   outline: none !important;
   border: none !important;
@@ -26,34 +26,26 @@
   border: none !important;
 }
 
-/* Text styling: crisp dark in light mode, crisp white in dark mode */
+/* Text styling matching GitHub native UnderlineNav tabs */
 #gv-agile-repo-tab .gv-agile-text {
   font-weight: 600 !important;
   font-size: 14px !important;
   color: var(--fgColor-default, var(--color-fg-default, #1f2328)) !important;
 }
 
-/* Zap icon in sharp amber/orange */
+/* Black / dark gray zap icon matching all native GitHub tab icons */
 #gv-agile-repo-tab .gv-agile-icon {
-  color: #d29922 !important;
-  fill: #d29922 !important;
+  color: var(--fgColor-muted, var(--color-fg-muted, #636c76)) !important;
+  fill: currentColor !important;
   vertical-align: text-bottom !important;
   flex-shrink: 0;
 }
 
-/* PRO Badge */
-#gv-agile-repo-tab .gv-agile-badge {
-  background-color: rgba(209, 154, 34, 0.15) !important;
-  color: #9e6a03 !important;
-  border: 1px solid rgba(209, 154, 34, 0.4) !important;
-  font-weight: 700 !important;
-  font-size: 10px !important;
-  padding: 0 5px !important;
-  border-radius: 2em !important;
-  line-height: 16px !important;
+#gv-agile-repo-tab .gv-agile-tab-link:hover .gv-agile-icon {
+  color: var(--fgColor-default, var(--color-fg-default, #1f2328)) !important;
 }
 
-/* Explicit dark mode detection */
+/* Dark mode specific overrides */
 [data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-text,
 [data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-tab-link,
 html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-text,
@@ -63,13 +55,6 @@ html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-tab-link {
 
 [data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-icon,
 html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-icon {
-  color: #f78166 !important;
-  fill: #f78166 !important;
-}
-
-[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-badge,
-html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-badge {
-  background-color: rgba(247, 129, 102, 0.2) !important;
-  color: #f78166 !important;
-  border-color: rgba(247, 129, 102, 0.4) !important;
+  color: #8b949e !important;
+  fill: #8b949e !important;
 }
