@@ -23,11 +23,12 @@
       navBar.querySelector('a[href*="/projects"]')?.closest('li') ||
       navBar.querySelector('a[data-tab-item*="projects"]')?.closest('li');
 
-    // Create GV Agile Tab Element with 100% Native GitHub Primer markup
+    // Create GV Agile Tab Element with 100% Native GitHub Primer markup & inline vertical alignment
     const tabItem = document.createElement('li');
     tabItem.className = 'd-inline-flex';
     tabItem.setAttribute('data-view-component', 'true');
     tabItem.id = 'gv-agile-repo-tab';
+    tabItem.style.cssText = 'display: inline-flex !important; align-items: center !important; height: 100% !important; vertical-align: top !important;';
 
     const tabLink = document.createElement('a');
     tabLink.id = 'gv-agile-tab';
@@ -36,9 +37,11 @@
     tabLink.setAttribute('data-tab-item', 'gv-agile-tab');
     tabLink.setAttribute('data-view-component', 'true');
     tabLink.title = 'GV Agile Kanban Board & Sprint Planning';
+    // Position relative top -2px directly lifts the tab to exactly match neighboring baseline
+    tabLink.style.cssText = 'position: relative !important; top: -2px !important; outline: none !important; display: inline-flex !important; align-items: center !important;';
 
-    // Zero-whitespace inline HTML to prevent font strut baseline shift
-    tabLink.innerHTML = '<svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-zap UnderlineNav-octicon"><path d="M7.747.054a.75.75 0 0 1 .506.71v5.986h4.997a.75.75 0 0 1 .59 1.213l-7.25 9a.75.75 0 0 1-1.24-.766l1.32-5.433H2.25a.75.75 0 0 1-.59-1.213l6-7.5a.75.75 0 0 1 .087-.075Z"></path></svg><span data-content="GV Agile">GV Agile</span>';
+    // Zero-whitespace inline HTML with Primer UnderlineNav classes
+    tabLink.innerHTML = '<svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-zap UnderlineNav-octicon" style="margin-right: 4px !important;"><path d="M7.747.054a.75.75 0 0 1 .506.71v5.986h4.997a.75.75 0 0 1 .59 1.213l-7.25 9a.75.75 0 0 1-1.24-.766l1.32-5.433H2.25a.75.75 0 0 1-.59-1.213l6-7.5a.75.75 0 0 1 .087-.075Z"></path></svg><span data-content="GV Agile">GV Agile</span>';
 
     // Insert between Actions and Projects
     if (projectsTab) {

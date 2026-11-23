@@ -3,16 +3,20 @@
 #gv-agile-repo-tab {
   display: inline-flex !important;
   align-items: center !important;
+  vertical-align: top !important;
+  height: 100% !important;
 }
 
 #gv-agile-repo-tab a.UnderlineNav-item {
-  display: flex !important;
+  display: inline-flex !important;
   align-items: center !important;
   position: relative !important;
   top: -2px !important;
   outline: none !important;
 }
 
-#gv-agile-repo-tab a.UnderlineNav-item:focus {
+#gv-agile-repo-tab a.UnderlineNav-item:focus,
+#gv-agile-repo-tab a.UnderlineNav-item:focus-visible {
   outline: none !important;
+  box-shadow: none !important;
 }
