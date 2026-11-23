@@ -51,16 +51,22 @@ export const TableView: React.FC<TableViewProps> = ({
 
   const getStatusBadge = (status: ItemStatus) => {
     switch (status) {
+      case 'New Issues':
       case 'Icebox':
         return 'bg-[#21262d] text-[#8b949e] border-[#30363d]';
+      case 'Product Backlog':
       case 'Backlog':
+        return 'bg-[#1f2d3d] text-[#58a6ff] border-[#1f6feb]';
+      case 'Ready for Dev':
         return 'bg-[#2e261a] text-[#d29922] border-[#9e6a03]';
       case 'In Progress':
-        return 'bg-[#1f2d3d] text-[#58a6ff] border-[#1f6feb]';
+        return 'bg-[#2a1e17] text-[#f0883e] border-[#bd561d]';
       case 'In Review':
         return 'bg-[#2e1f3d] text-[#a371f7] border-[#8957e5]';
       case 'Done':
         return 'bg-[#1b342b] text-[#3fb950] border-[#238636]';
+      default:
+        return 'bg-[#21262d] text-[#8b949e] border-[#30363d]';
     }
   };
 
@@ -172,9 +178,11 @@ export const TableView: React.FC<TableViewProps> = ({
                       item.status
                     )}`}
                   >
+                    <option value="New Issues" className="bg-[#161b22] text-[#8b949e]">New Issues</option>
                     <option value="Icebox" className="bg-[#161b22] text-[#8b949e]">Icebox</option>
-                    <option value="Backlog" className="bg-[#161b22] text-[#d29922]">Backlog</option>
-                    <option value="In Progress" className="bg-[#161b22] text-[#58a6ff]">In Progress</option>
+                    <option value="Product Backlog" className="bg-[#161b22] text-[#58a6ff]">Product Backlog</option>
+                    <option value="Ready for Dev" className="bg-[#161b22] text-[#d29922]">Ready for Dev</option>
+                    <option value="In Progress" className="bg-[#161b22] text-[#f0883e]">In Progress</option>
                     <option value="In Review" className="bg-[#161b22] text-[#a371f7]">In Review</option>
                     <option value="Done" className="bg-[#161b22] text-[#3fb950]">Done</option>
                   </select>

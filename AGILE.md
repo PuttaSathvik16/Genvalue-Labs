@@ -23,15 +23,17 @@ This document outlines our Agile Scrum & Kanban workflows on GitHub, following m
 
 ---
 
-## 2. Agile Pipeline Columns (Kanban & Sprint Boards)
+## 2. GV Agile Pipeline Columns & WIP Limits (Kanban & Sprint Boards)
 
-Our GitHub Project and in-repo board use 5 structured pipelines:
+Our GitHub Project and **GV Agile** board use 7 structured pipelines with Work-In-Progress (WIP) limits:
 
-1. **Icebox**: Unprioritized backlog of ideas and long-term proposals.
-2. **Product Backlog**: Prioritized and estimated user stories ready for upcoming sprints.
-3. **In Progress**: Work committed and currently in active development.
-4. **In Review**: Pull Requests undergoing peer review, automated CI tests, and design verification.
-5. **Done**: Merged, tested, and shipped to production.
+1. **New Issues**: Newly created issues and customer requests awaiting triage and estimation.
+2. **Icebox**: Unprioritized backlog of ideas, with collapsible sidebar view.
+3. **Product Backlog**: Prioritized and estimated user stories ready for sprint planning.
+4. **Ready for Dev**: Refined stories committed to the active sprint (*WIP Limit: 4 issues*).
+5. **In Progress**: Work committed and currently in active development (*WIP Limit: 4 issues*).
+6. **In Review / QA**: Pull Requests undergoing peer review, automated CI checks, and QA (*WIP Limit: 3 issues*).
+7. **Done**: Merged, verified, and shipped to production.
 
 ---
 

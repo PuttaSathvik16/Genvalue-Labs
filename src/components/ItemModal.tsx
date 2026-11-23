@@ -16,14 +16,14 @@ export const ItemModal: React.FC<ItemModalProps> = ({
   initialItem
 }) => {
   const [title, setTitle] = useState('');
-  const [status, setStatus] = useState<ItemStatus>('Backlog');
+  const [status, setStatus] = useState<ItemStatus>('Product Backlog');
   const [priority, setPriority] = useState<ItemPriority>('Medium');
   const [type, setType] = useState<ItemType>('issue');
   const [epic, setEpic] = useState('Agile Project Platform');
   const [assigneeName, setAssigneeName] = useState('Sathvik Putta');
   const [startDate, setStartDate] = useState('2026-11-20');
   const [targetDate, setTargetDate] = useState('2026-11-27');
-  const [iteration, setIteration] = useState('Sprint 1');
+  const [iteration, setIteration] = useState('Sprint 1 (Demo & Foundation)');
   const [estimate, setEstimate] = useState(3);
   const [labelsStr, setLabelsStr] = useState('feature, agile');
 
@@ -42,16 +42,16 @@ export const ItemModal: React.FC<ItemModalProps> = ({
       setLabelsStr(initialItem.labels.join(', '));
     } else {
       setTitle('');
-      setStatus('Backlog');
+      setStatus('Product Backlog');
       setPriority('Medium');
       setType('issue');
       setEpic('Agile Project Platform');
       setAssigneeName('Sathvik Putta');
       setStartDate('2026-11-20');
       setTargetDate('2026-11-27');
-      setIteration('Sprint 1');
+      setIteration('Sprint 1 (Demo & Foundation)');
       setEstimate(3);
-      setLabelsStr('feature, user-story');
+      setLabelsStr('feature, agile');
     }
   }, [initialItem, isOpen]);
 
@@ -72,6 +72,7 @@ export const ItemModal: React.FC<ItemModalProps> = ({
       status,
       priority,
       type,
+      repo: initialItem?.repo || 'genvaluelabs-a11y/Genvalue-Labs',
       epic: epic.trim() || undefined,
       assignee: {
         name: assigneeName,
@@ -94,11 +95,11 @@ export const ItemModal: React.FC<ItemModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#30363d]">
           <h3 className="text-base font-semibold text-[#f0f6fc]">
-            {initialItem ? `Edit Item (${initialItem.id})` : 'Create Agile Story / Item'}
+            {initialItem ? `Edit Item (${initialItem.id})` : 'Create GV Agile Story / Issue'}
           </h3>
           <button 
             onClick={onClose}
-            className="text-[#8b949e] hover:text-[#c9d1d9] p-1 rounded transition-colors"
+            className="text-[#8b949e] hover:text-[#c9d1d9] p-1 rounded-md hover:bg-[#21262d] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -108,15 +109,15 @@ export const ItemModal: React.FC<ItemModalProps> = ({
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div>
             <label className="block text-xs font-medium text-[#8b949e] mb-1">
-              Title / User Story
+              Title <span className="text-[#f85149]">*</span>
             </label>
             <input
               type="text"
               required
               value={title}
               onChange={e => setTitle(e.target.value)}
-              placeholder="As a <user>, I want <goal> so that <benefit>"
-              className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-2 text-sm text-[#f0f6fc] focus:outline-none focus:border-[#58a6ff]"
+              placeholder="e.g. Implement multi-repo synchronization for GV Agile"
+              className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-2 text-sm text-[#c9d1d9] placeholder-[#8b949e] focus:outline-none focus:border-[#58a6ff]"
             />
           </div>
 
@@ -143,10 +144,12 @@ export const ItemModal: React.FC<ItemModalProps> = ({
                 onChange={e => setStatus(e.target.value as ItemStatus)}
                 className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-1.5 text-xs text-[#c9d1d9] focus:outline-none focus:border-[#58a6ff]"
               >
+                <option value="New Issues">New Issues</option>
                 <option value="Icebox">Icebox</option>
-                <option value="Backlog">Backlog</option>
+                <option value="Product Backlog">Product Backlog</option>
+                <option value="Ready for Dev">Ready for Dev</option>
                 <option value="In Progress">In Progress</option>
-                <option value="In Review">In Review</option>
+                <option value="In Review">In Review / QA</option>
                 <option value="Done">Done</option>
               </select>
             </div>
@@ -191,15 +194,41 @@ export const ItemModal: React.FC<ItemModalProps> = ({
               <select
                 value={estimate}
                 onChange={e => setEstimate(Number(e.target.value))}
-                className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-1.5 text-xs text-[#c9d1d9] focus:outline-none focus:border-[#58a6ff]"
+                className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-1.5 text-xs text-[#c9d1d9] font-mono font-bold focus:outline-none focus:border-[#58a6ff]"
               >
-                <option value="1">1 pt (Trivial)</option>
-                <option value="2">2 pts (Small)</option>
-                <option value="3">3 pts (Medium)</option>
-                <option value="5">5 pts (Large)</option>
-                <option value="8">8 pts (Epic-sized)</option>
-                <option value="13">13 pts (Major)</option>
+                <option value="1">1 pt</option>
+                <option value="2">2 pts</option>
+                <option value="3">3 pts</option>
+                <option value="5">5 pts</option>
+                <option value="8">8 pts</option>
+                <option value="13">13 pts</option>
               </select>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-medium text-[#8b949e] mb-1">
+                Assignee
+              </label>
+              <input
+                type="text"
+                value={assigneeName}
+                onChange={e => setAssigneeName(e.target.value)}
+                className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-1.5 text-xs text-[#c9d1d9] focus:outline-none focus:border-[#58a6ff]"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-[#8b949e] mb-1">
+                Sprint Iteration
+              </label>
+              <input
+                type="text"
+                value={iteration}
+                onChange={e => setIteration(e.target.value)}
+                className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-1.5 text-xs text-[#c9d1d9] focus:outline-none focus:border-[#58a6ff]"
+              />
             </div>
           </div>
 
@@ -231,13 +260,13 @@ export const ItemModal: React.FC<ItemModalProps> = ({
 
           <div>
             <label className="block text-xs font-medium text-[#8b949e] mb-1">
-              Sprint / Iteration
+              Labels (comma-separated)
             </label>
             <input
               type="text"
-              value={iteration}
-              onChange={e => setIteration(e.target.value)}
-              placeholder="e.g. Sprint 1"
+              value={labelsStr}
+              onChange={e => setLabelsStr(e.target.value)}
+              placeholder="e.g. backend, security, api"
               className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-1.5 text-xs text-[#c9d1d9] focus:outline-none focus:border-[#58a6ff]"
             />
           </div>
@@ -247,15 +276,15 @@ export const ItemModal: React.FC<ItemModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-3 py-1.5 text-xs font-medium text-[#c9d1d9] hover:bg-[#21262d] rounded-md transition-colors"
+              className="px-4 py-2 text-xs font-medium text-[#c9d1d9] hover:bg-[#21262d] rounded-md transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-1.5 text-xs font-medium text-white bg-[#238636] hover:bg-[#2ea043] rounded-md shadow-sm transition-colors"
+              className="px-4 py-2 text-xs font-medium text-white bg-[#238636] hover:bg-[#2ea043] rounded-md shadow-sm transition-colors"
             >
-              Save Story
+              {initialItem ? 'Save Changes' : 'Create Story'}
             </button>
           </div>
         </form>

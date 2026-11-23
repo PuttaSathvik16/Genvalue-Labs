@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ProjectHeader } from './ProjectHeader';
 import { TableView } from './TableView';
 import { BoardView } from './BoardView';
@@ -12,8 +12,14 @@ export const ProjectContainer: React.FC = () => {
   const [views, setViews] = useState<ViewConfig[]>(initialViews);
   const [activeViewId, setActiveViewId] = useState<string>('view-1');
   const [items, setItems] = useState<ProjectItem[]>(initialItems);
+
+  // Multi-Filter State (ZenHub / GV Agile style)
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [selectedStatusFilter, setSelectedStatusFilter] = useState<string>('All');
+  const [selectedLabelFilter, setSelectedLabelFilter] = useState<string>('All');
+  const [selectedSprintFilter, setSelectedSprintFilter] = useState<string>('All');
+  const [selectedAssigneeFilter, setSelectedAssigneeFilter] = useState<string>('All');
+  const [selectedEpicFilter, setSelectedEpicFilter] = useState<string>('All');
+  const [selectedEstimateFilter, setSelectedEstimateFilter] = useState<number | 'All'>('All');
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,12 +27,34 @@ export const ProjectContainer: React.FC = () => {
 
   const activeView = views.find(v => v.id === activeViewId) || views[0];
 
-  // Change layout of current view
-  const handleUpdateViewLayout = (viewId: string, newLayout: LayoutType) => {
-    setViews(prev =>
-      prev.map(v => (v.id === viewId ? { ...v, layout: newLayout, name: `${newLayout.charAt(0).toUpperCase() + newLayout.slice(1)}` } : v))
-    );
-  };
+  // Derive unique filter options
+  const availableLabels = useMemo(() => {
+    const set = new Set<string>();
+    items.forEach(i => i.labels.forEach(l => set.add(l)));
+    return Array.from(set).sort();
+  }, [items]);
+
+  const availableSprints = useMemo(() => {
+    const set = new Set<string>();
+    items.forEach(i => {
+      if (i.iteration) set.add(i.iteration);
+    });
+    return Array.from(set).sort();
+  }, [items]);
+
+  const availableAssignees = useMemo(() => {
+    const set = new Set<string>();
+    items.forEach(i => set.add(i.assignee.name));
+    return Array.from(set).sort();
+  }, [items]);
+
+  const availableEpics = useMemo(() => {
+    const set = new Set<string>();
+    items.forEach(i => {
+      if (i.epic) set.add(i.epic);
+    });
+    return Array.from(set).sort();
+  }, [items]);
 
   // Add a new view tab with designated layout
   const handleAddNewView = (layout: LayoutType) => {
@@ -60,35 +88,81 @@ export const ProjectContainer: React.FC = () => {
     });
   };
 
-  // Filter items by search query & status pill
-  const filteredItems = items.filter(item => {
-    const matchesSearch =
-      searchQuery.trim() === '' ||
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (item.epic && item.epic.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      item.assignee.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.labels.some(l => l.toLowerCase().includes(searchQuery.toLowerCase()));
+  // Filter items across all multi-filters
+  const filteredItems = useMemo(() => {
+    return items.filter(item => {
+      // 1. Text Search
+      const matchesSearch =
+        searchQuery.trim() === '' ||
+        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (item.epic && item.epic.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        item.assignee.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.labels.some(l => l.toLowerCase().includes(searchQuery.toLowerCase()));
 
-    const matchesStatus =
-      selectedStatusFilter === 'All' || item.status === selectedStatusFilter;
+      // 2. Label Filter
+      const matchesLabel =
+        selectedLabelFilter === 'All' || item.labels.includes(selectedLabelFilter);
 
-    return matchesSearch && matchesStatus;
-  });
+      // 3. Sprint Filter
+      const matchesSprint =
+        selectedSprintFilter === 'All' || item.iteration === selectedSprintFilter;
+
+      // 4. Assignee Filter
+      const matchesAssignee =
+        selectedAssigneeFilter === 'All' || item.assignee.name === selectedAssigneeFilter;
+
+      // 5. Epic Filter
+      const matchesEpic =
+        selectedEpicFilter === 'All' || item.epic === selectedEpicFilter;
+
+      // 6. Estimate Filter
+      const matchesEstimate =
+        selectedEstimateFilter === 'All' || item.estimate === selectedEstimateFilter;
+
+      return (
+        matchesSearch &&
+        matchesLabel &&
+        matchesSprint &&
+        matchesAssignee &&
+        matchesEpic &&
+        matchesEstimate
+      );
+    });
+  }, [
+    items,
+    searchQuery,
+    selectedLabelFilter,
+    selectedSprintFilter,
+    selectedAssigneeFilter,
+    selectedEpicFilter,
+    selectedEstimateFilter
+  ]);
 
   return (
     <div className="flex flex-col h-screen bg-[#0d1117] text-[#c9d1d9] overflow-hidden select-text">
-      {/* Header with breadcrumbs, tabs, search, and layout switcher */}
+      {/* GV Agile Header with repository breadcrumbs, tabs, and multi-filter bar */}
       <ProjectHeader
         views={views}
         activeViewId={activeViewId}
         onSelectView={setActiveViewId}
-        onUpdateViewLayout={handleUpdateViewLayout}
         onAddNewView={handleAddNewView}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
-        selectedStatusFilter={selectedStatusFilter}
-        onStatusFilterChange={setSelectedStatusFilter}
+        selectedLabelFilter={selectedLabelFilter}
+        onLabelFilterChange={setSelectedLabelFilter}
+        selectedSprintFilter={selectedSprintFilter}
+        onSprintFilterChange={setSelectedSprintFilter}
+        selectedAssigneeFilter={selectedAssigneeFilter}
+        onAssigneeFilterChange={setSelectedAssigneeFilter}
+        selectedEpicFilter={selectedEpicFilter}
+        onEpicFilterChange={setSelectedEpicFilter}
+        selectedEstimateFilter={selectedEstimateFilter}
+        onEstimateFilterChange={setSelectedEstimateFilter}
+        availableLabels={availableLabels}
+        availableSprints={availableSprints}
+        availableAssignees={availableAssignees}
+        availableEpics={availableEpics}
         onOpenNewItemModal={() => {
           setEditingItem(null);
           setIsModalOpen(true);
@@ -96,12 +170,12 @@ export const ProjectContainer: React.FC = () => {
       />
 
       {/* Agile Sprint Velocity & Story Points Tracker */}
-      <SprintVelocityWidget items={items} />
+      <SprintVelocityWidget items={filteredItems} />
 
       {/* Main View Area rendering the active layout */}
       <main className="flex-1 overflow-hidden flex flex-col">
-        {activeView.layout === 'table' && (
-          <TableView
+        {activeView.layout === 'board' && (
+          <BoardView
             items={filteredItems}
             onUpdateStatus={handleUpdateStatus}
             onOpenNewItemModal={() => {
@@ -115,8 +189,8 @@ export const ProjectContainer: React.FC = () => {
           />
         )}
 
-        {activeView.layout === 'board' && (
-          <BoardView
+        {activeView.layout === 'table' && (
+          <TableView
             items={filteredItems}
             onUpdateStatus={handleUpdateStatus}
             onOpenNewItemModal={() => {
@@ -148,10 +222,7 @@ export const ProjectContainer: React.FC = () => {
       {/* Item Modal (Create & Edit) */}
       <ItemModal
         isOpen={isModalOpen}
-        onClose={() => {
-          setIsModalOpen(false);
-          setEditingItem(null);
-        }}
+        onClose={() => setIsModalOpen(false)}
         onSave={handleSaveItem}
         initialItem={editingItem}
       />
