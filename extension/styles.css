@@ -1,7 +1,16 @@
-/* GV Agile Extension: Uses 100% native GitHub Primer UnderlineNav classes */
+/* GV Agile Extension: Exact vertical baseline alignment matching native GitHub UnderlineNav */
 
 #gv-agile-repo-tab {
   display: inline-flex !important;
+  align-items: center !important;
+}
+
+#gv-agile-repo-tab a.UnderlineNav-item {
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+  top: -2px !important;
+  outline: none !important;
 }
 
 #gv-agile-repo-tab a.UnderlineNav-item:focus {

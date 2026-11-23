@@ -37,13 +37,8 @@
     tabLink.setAttribute('data-view-component', 'true');
     tabLink.title = 'GV Agile Kanban Board & Sprint Planning';
 
-    // Exact GitHub UnderlineNav structure: SVG with UnderlineNav-octicon + span[data-content]
-    tabLink.innerHTML = `
-      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-zap UnderlineNav-octicon">
-        <path d="M7.747.054a.75.75 0 0 1 .506.71v5.986h4.997a.75.75 0 0 1 .59 1.213l-7.25 9a.75.75 0 0 1-1.24-.766l1.32-5.433H2.25a.75.75 0 0 1-.59-1.213l6-7.5a.75.75 0 0 1 .087-.075Z"></path>
-      </svg>
-      <span data-content="GV Agile">GV Agile</span>
-    `;
+    // Zero-whitespace inline HTML to prevent font strut baseline shift
+    tabLink.innerHTML = '<svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-zap UnderlineNav-octicon"><path d="M7.747.054a.75.75 0 0 1 .506.71v5.986h4.997a.75.75 0 0 1 .59 1.213l-7.25 9a.75.75 0 0 1-1.24-.766l1.32-5.433H2.25a.75.75 0 0 1-.59-1.213l6-7.5a.75.75 0 0 1 .087-.075Z"></path></svg><span data-content="GV Agile">GV Agile</span>';
 
     // Insert between Actions and Projects
     if (projectsTab) {
