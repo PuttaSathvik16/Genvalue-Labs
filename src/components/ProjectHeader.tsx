@@ -143,19 +143,17 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
           <span className="px-1.5 py-0.2 bg-[#30363d] rounded-full text-[10px]">2</span>
         </button>
         
-        {/* GV Agile Dedicated Tab (Highlighted exactly like ZenHub in screenshot) */}
-        <button className="flex items-center space-x-1.5 px-3.5 py-2 font-semibold text-[#f0f6fc] border-b-2 border-[#f78166] bg-[#21262d]/50 transition-colors">
-          <Zap className="w-4 h-4 text-[#f78166]" />
-          <span>GV Agile</span>
-          <span className="px-1.5 py-0.5 bg-[#f78166]/20 text-[#f78166] text-[10px] font-bold rounded">
-            PRO
-          </span>
-        </button>
-
         <button className="flex items-center space-x-1.5 px-3 py-2 text-[#8b949e] hover:text-[#c9d1d9] border-b-2 border-transparent transition-colors">
           <PlayCircle className="w-4 h-4" />
           <span>Actions</span>
         </button>
+        
+        {/* GV Agile Dedicated Tab (Between Actions and Projects) */}
+        <button className="flex items-center space-x-1.5 px-3.5 py-2 font-semibold text-[#f0f6fc] border-b-2 border-[#58a6ff] bg-[#21262d]/50 transition-colors">
+          <Zap className="w-4 h-4 text-[#c9d1d9]" />
+          <span>GV Agile</span>
+        </button>
+
         <button className="flex items-center space-x-1.5 px-3 py-2 text-[#8b949e] hover:text-[#c9d1d9] border-b-2 border-transparent transition-colors">
           <TableIcon className="w-4 h-4" />
           <span>Projects</span>
