@@ -1,60 +1,9 @@
-/* GV Agile Tab Styles matching GitHub Primer Design System in both Light & Dark themes */
+/* GV Agile Extension: Uses 100% native GitHub Primer UnderlineNav classes */
 
-.gv-agile-tab-item {
+#gv-agile-repo-tab {
   display: inline-flex !important;
-  align-items: center !important;
 }
 
-#gv-agile-repo-tab .gv-agile-tab-link {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  text-decoration: none !important;
+#gv-agile-repo-tab a.UnderlineNav-item:focus {
   outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  cursor: pointer;
-  padding: 0 8px !important;
-  color: var(--fgColor-default, var(--color-fg-default, #1f2328)) !important;
-}
-
-#gv-agile-repo-tab .gv-agile-tab-link:focus,
-#gv-agile-repo-tab .gv-agile-tab-link:focus-visible,
-#gv-agile-repo-tab .gv-agile-tab-link:active {
-  outline: none !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-
-/* Text styling matching GitHub native UnderlineNav tabs */
-#gv-agile-repo-tab .gv-agile-text {
-  font-weight: 600 !important;
-  font-size: 14px !important;
-  color: var(--fgColor-default, var(--color-fg-default, #1f2328)) !important;
-}
-
-/* Black / dark gray zap icon matching all native GitHub tab icons */
-#gv-agile-repo-tab .gv-agile-icon {
-  color: var(--fgColor-muted, var(--color-fg-muted, #636c76)) !important;
-  fill: currentColor !important;
-  vertical-align: text-bottom !important;
-  flex-shrink: 0;
-}
-
-#gv-agile-repo-tab .gv-agile-tab-link:hover .gv-agile-icon {
-  color: var(--fgColor-default, var(--color-fg-default, #1f2328)) !important;
-}
-
-/* Dark mode specific overrides */
-[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-text,
-[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-tab-link,
-html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-text,
-html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-tab-link {
-  color: #f0f6fc !important;
-}
-
-[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-icon,
-html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-icon {
-  color: #8b949e !important;
-  fill: #8b949e !important;
 }

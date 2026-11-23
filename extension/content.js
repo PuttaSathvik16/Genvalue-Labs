@@ -23,23 +23,26 @@
       navBar.querySelector('a[href*="/projects"]')?.closest('li') ||
       navBar.querySelector('a[data-tab-item*="projects"]')?.closest('li');
 
-    // Create GV Agile Tab Element
+    // Create GV Agile Tab Element with 100% Native GitHub Primer markup
     const tabItem = document.createElement('li');
-    tabItem.className = 'd-inline-flex gv-agile-tab-item';
+    tabItem.className = 'd-inline-flex';
+    tabItem.setAttribute('data-view-component', 'true');
     tabItem.id = 'gv-agile-repo-tab';
 
     const tabLink = document.createElement('a');
+    tabLink.id = 'gv-agile-tab';
     tabLink.href = PROJECT_BOARD_URL;
-    tabLink.className = 'UnderlineNav-item gv-agile-tab-link';
-    tabLink.setAttribute('data-tab-item', 'gv-agile');
+    tabLink.className = 'UnderlineNav-item';
+    tabLink.setAttribute('data-tab-item', 'gv-agile-tab');
+    tabLink.setAttribute('data-view-component', 'true');
     tabLink.title = 'GV Agile Kanban Board & Sprint Planning';
 
-    // Black / dark gray zap icon + clean "GV Agile" text (no PRO badge)
+    // Exact GitHub UnderlineNav structure: SVG with UnderlineNav-octicon + span[data-content]
     tabLink.innerHTML = `
-      <svg class="octicon octicon-zap gv-agile-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" style="vertical-align: text-bottom; flex-shrink: 0;">
-        <path d="M7.747.054a.75.75 0 0 1 .506.71v5.986h4.997a.75.75 0 0 1 .59 1.213l-7.25 9a.75.75 0 0 1-1.24-.766l1.32-5.433H2.25a.75.75 0 0 1-.59-1.213l6-7.5a.75.75 0 0 1 .087-.075Z"/>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-zap UnderlineNav-octicon">
+        <path d="M7.747.054a.75.75 0 0 1 .506.71v5.986h4.997a.75.75 0 0 1 .59 1.213l-7.25 9a.75.75 0 0 1-1.24-.766l1.32-5.433H2.25a.75.75 0 0 1-.59-1.213l6-7.5a.75.75 0 0 1 .087-.075Z"></path>
       </svg>
-      <span class="gv-agile-text" data-content="GV Agile" style="font-weight: 600; font-size: 14px;">GV Agile</span>
+      <span data-content="GV Agile">GV Agile</span>
     `;
 
     // Insert between Actions and Projects
