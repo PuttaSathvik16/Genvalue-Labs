@@ -1,6 +1,14 @@
 export type LayoutType = 'table' | 'board' | 'roadmap';
 
-export type ItemStatus = 'Icebox' | 'Backlog' | 'In Progress' | 'In Review' | 'Done';
+export type ItemStatus = 
+  | 'New Issues' 
+  | 'Icebox' 
+  | 'Product Backlog' 
+  | 'Backlog' 
+  | 'Ready for Dev' 
+  | 'In Progress' 
+  | 'In Review' 
+  | 'Done';
 
 export type ItemPriority = 'Low' | 'Medium' | 'High' | 'Urgent';
 
@@ -17,13 +25,16 @@ export interface ProjectItem {
   status: ItemStatus;
   priority: ItemPriority;
   type: ItemType;
+  repo?: string; // e.g. "genvaluelabs-a11y/Genvalue-Labs"
   epic?: string;
   assignee: Assignee;
   startDate: string; // YYYY-MM-DD
   targetDate: string; // YYYY-MM-DD
-  iteration: string;
+  iteration: string; // e.g. "Sprint 1 (Demo & Foundation)"
   labels: string[];
   estimate: number; // Story Points (1, 2, 3, 5, 8, 13)
+  linkedPr?: string;
+  blocked?: boolean;
 }
 
 export interface ViewConfig {
@@ -31,4 +42,14 @@ export interface ViewConfig {
   name: string;
   layout: LayoutType;
   description?: string;
+}
+
+export interface PipelineConfig {
+  status: ItemStatus;
+  title: string;
+  color: string;
+  border: string;
+  badgeBg: string;
+  wipLimit?: number;
+  desc: string;
 }

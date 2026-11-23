@@ -15,7 +15,7 @@ export const SprintVelocityWidget: React.FC<SprintVelocityWidgetProps> = ({ item
     .filter(i => i.status === 'In Progress' || i.status === 'In Review')
     .reduce((sum, item) => sum + (item.estimate || 0), 0);
   const backlogPoints = items
-    .filter(i => i.status === 'Backlog' || i.status === 'Icebox')
+    .filter(i => i.status === 'Backlog' || i.status === 'Icebox' || i.status === 'New Issues' || i.status === 'Product Backlog' || i.status === 'Ready for Dev')
     .reduce((sum, item) => sum + (item.estimate || 0), 0);
 
   const completionPct = totalPoints > 0 ? Math.round((donePoints / totalPoints) * 100) : 0;
