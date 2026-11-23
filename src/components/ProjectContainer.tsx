@@ -4,6 +4,7 @@ import { TableView } from './TableView';
 import { BoardView } from './BoardView';
 import { RoadmapView } from './RoadmapView';
 import { ItemModal } from './ItemModal';
+import { SprintVelocityWidget } from './SprintVelocityWidget';
 import { ProjectItem, ViewConfig, LayoutType, ItemStatus } from '../types/project';
 import { initialViews, initialItems } from '../data/mockData';
 
@@ -20,7 +21,7 @@ export const ProjectContainer: React.FC = () => {
 
   const activeView = views.find(v => v.id === activeViewId) || views[0];
 
-  // Change layout of current view (as requested in GitHub Docs: changing-the-layout-of-a-view)
+  // Change layout of current view
   const handleUpdateViewLayout = (viewId: string, newLayout: LayoutType) => {
     setViews(prev =>
       prev.map(v => (v.id === viewId ? { ...v, layout: newLayout, name: `${newLayout.charAt(0).toUpperCase() + newLayout.slice(1)}` } : v))
@@ -65,6 +66,7 @@ export const ProjectContainer: React.FC = () => {
       searchQuery.trim() === '' ||
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (item.epic && item.epic.toLowerCase().includes(searchQuery.toLowerCase())) ||
       item.assignee.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.labels.some(l => l.toLowerCase().includes(searchQuery.toLowerCase()));
 
@@ -92,6 +94,9 @@ export const ProjectContainer: React.FC = () => {
           setIsModalOpen(true);
         }}
       />
+
+      {/* Agile Sprint Velocity & Story Points Tracker */}
+      <SprintVelocityWidget items={items} />
 
       {/* Main View Area rendering the active layout */}
       <main className="flex-1 overflow-hidden flex flex-col">

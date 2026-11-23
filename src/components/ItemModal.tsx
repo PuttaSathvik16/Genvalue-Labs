@@ -16,15 +16,16 @@ export const ItemModal: React.FC<ItemModalProps> = ({
   initialItem
 }) => {
   const [title, setTitle] = useState('');
-  const [status, setStatus] = useState<ItemStatus>('Todo');
+  const [status, setStatus] = useState<ItemStatus>('Backlog');
   const [priority, setPriority] = useState<ItemPriority>('Medium');
   const [type, setType] = useState<ItemType>('issue');
+  const [epic, setEpic] = useState('Agile Project Platform');
   const [assigneeName, setAssigneeName] = useState('Sathvik Putta');
   const [startDate, setStartDate] = useState('2026-11-20');
   const [targetDate, setTargetDate] = useState('2026-11-27');
-  const [iteration, setIteration] = useState('Iteration 1');
+  const [iteration, setIteration] = useState('Sprint 1');
   const [estimate, setEstimate] = useState(3);
-  const [labelsStr, setLabelsStr] = useState('frontend, feature');
+  const [labelsStr, setLabelsStr] = useState('feature, agile');
 
   useEffect(() => {
     if (initialItem) {
@@ -32,6 +33,7 @@ export const ItemModal: React.FC<ItemModalProps> = ({
       setStatus(initialItem.status);
       setPriority(initialItem.priority);
       setType(initialItem.type);
+      setEpic(initialItem.epic || '');
       setAssigneeName(initialItem.assignee.name);
       setStartDate(initialItem.startDate);
       setTargetDate(initialItem.targetDate);
@@ -40,15 +42,16 @@ export const ItemModal: React.FC<ItemModalProps> = ({
       setLabelsStr(initialItem.labels.join(', '));
     } else {
       setTitle('');
-      setStatus('Todo');
+      setStatus('Backlog');
       setPriority('Medium');
       setType('issue');
+      setEpic('Agile Project Platform');
       setAssigneeName('Sathvik Putta');
       setStartDate('2026-11-20');
       setTargetDate('2026-11-27');
-      setIteration('Iteration 1');
+      setIteration('Sprint 1');
       setEstimate(3);
-      setLabelsStr('feature');
+      setLabelsStr('feature, user-story');
     }
   }, [initialItem, isOpen]);
 
@@ -69,6 +72,7 @@ export const ItemModal: React.FC<ItemModalProps> = ({
       status,
       priority,
       type,
+      epic: epic.trim() || undefined,
       assignee: {
         name: assigneeName,
         avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=64&h=64&fit=crop&crop=faces'
@@ -90,7 +94,7 @@ export const ItemModal: React.FC<ItemModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#30363d]">
           <h3 className="text-base font-semibold text-[#f0f6fc]">
-            {initialItem ? `Edit Item (${initialItem.id})` : 'Create New Item'}
+            {initialItem ? `Edit Item (${initialItem.id})` : 'Create Agile Story / Item'}
           </h3>
           <button 
             onClick={onClose}
@@ -104,19 +108,51 @@ export const ItemModal: React.FC<ItemModalProps> = ({
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div>
             <label className="block text-xs font-medium text-[#8b949e] mb-1">
-              Title
+              Title / User Story
             </label>
             <input
               type="text"
               required
               value={title}
               onChange={e => setTitle(e.target.value)}
-              placeholder="What needs to be done?"
+              placeholder="As a <user>, I want <goal> so that <benefit>"
               className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-2 text-sm text-[#f0f6fc] focus:outline-none focus:border-[#58a6ff]"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-medium text-[#8b949e] mb-1">
+                Epic
+              </label>
+              <input
+                type="text"
+                value={epic}
+                onChange={e => setEpic(e.target.value)}
+                placeholder="e.g. Agile Project Platform"
+                className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-1.5 text-xs text-[#c9d1d9] focus:outline-none focus:border-[#58a6ff]"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-[#8b949e] mb-1">
+                Pipeline Status
+              </label>
+              <select
+                value={status}
+                onChange={e => setStatus(e.target.value as ItemStatus)}
+                className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-1.5 text-xs text-[#c9d1d9] focus:outline-none focus:border-[#58a6ff]"
+              >
+                <option value="Icebox">Icebox</option>
+                <option value="Backlog">Backlog</option>
+                <option value="In Progress">In Progress</option>
+                <option value="In Review">In Review</option>
+                <option value="Done">Done</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4">
             <div>
               <label className="block text-xs font-medium text-[#8b949e] mb-1">
                 Type
@@ -126,30 +162,12 @@ export const ItemModal: React.FC<ItemModalProps> = ({
                 onChange={e => setType(e.target.value as ItemType)}
                 className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-1.5 text-xs text-[#c9d1d9] focus:outline-none focus:border-[#58a6ff]"
               >
-                <option value="issue">Issue</option>
+                <option value="issue">User Story / Issue</option>
                 <option value="pull_request">Pull Request</option>
                 <option value="draft">Draft Item</option>
               </select>
             </div>
 
-            <div>
-              <label className="block text-xs font-medium text-[#8b949e] mb-1">
-                Status
-              </label>
-              <select
-                value={status}
-                onChange={e => setStatus(e.target.value as ItemStatus)}
-                className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-1.5 text-xs text-[#c9d1d9] focus:outline-none focus:border-[#58a6ff]"
-              >
-                <option value="Todo">Todo</option>
-                <option value="In Progress">In Progress</option>
-                <option value="In Review">In Review</option>
-                <option value="Done">Done</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-medium text-[#8b949e] mb-1">
                 Priority
@@ -168,16 +186,20 @@ export const ItemModal: React.FC<ItemModalProps> = ({
 
             <div>
               <label className="block text-xs font-medium text-[#8b949e] mb-1">
-                Estimate (Story Points)
+                Story Points (Fibonacci)
               </label>
-              <input
-                type="number"
-                min="1"
-                max="20"
+              <select
                 value={estimate}
                 onChange={e => setEstimate(Number(e.target.value))}
                 className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-1.5 text-xs text-[#c9d1d9] focus:outline-none focus:border-[#58a6ff]"
-              />
+              >
+                <option value="1">1 pt (Trivial)</option>
+                <option value="2">2 pts (Small)</option>
+                <option value="3">3 pts (Medium)</option>
+                <option value="5">5 pts (Large)</option>
+                <option value="8">8 pts (Epic-sized)</option>
+                <option value="13">13 pts (Major)</option>
+              </select>
             </div>
           </div>
 
@@ -209,13 +231,13 @@ export const ItemModal: React.FC<ItemModalProps> = ({
 
           <div>
             <label className="block text-xs font-medium text-[#8b949e] mb-1">
-              Labels (comma separated)
+              Sprint / Iteration
             </label>
             <input
               type="text"
-              value={labelsStr}
-              onChange={e => setLabelsStr(e.target.value)}
-              placeholder="e.g. backend, ui, bug"
+              value={iteration}
+              onChange={e => setIteration(e.target.value)}
+              placeholder="e.g. Sprint 1"
               className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-1.5 text-xs text-[#c9d1d9] focus:outline-none focus:border-[#58a6ff]"
             />
           </div>
@@ -233,7 +255,7 @@ export const ItemModal: React.FC<ItemModalProps> = ({
               type="submit"
               className="px-4 py-1.5 text-xs font-medium text-white bg-[#238636] hover:bg-[#2ea043] rounded-md shadow-sm transition-colors"
             >
-              Save Item
+              Save Story
             </button>
           </div>
         </form>

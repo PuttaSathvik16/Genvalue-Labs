@@ -5,13 +5,13 @@ export const initialViews: ViewConfig[] = [
     id: 'view-1',
     name: 'Table',
     layout: 'table',
-    description: 'High-density spreadsheet of issues and pull requests'
+    description: 'High-density spreadsheet of user stories, issues, and PRs'
   },
   {
     id: 'view-2',
     name: 'Board',
     layout: 'board',
-    description: 'Kanban view categorized by progress status'
+    description: 'Agile Kanban pipelines: Icebox, Backlog, In Progress, Review, Done'
   },
   {
     id: 'view-3',
@@ -28,13 +28,14 @@ export const initialItems: ProjectItem[] = [
     status: 'Done',
     priority: 'High',
     type: 'issue',
+    epic: 'Infrastructure & CI/CD',
     assignee: {
       name: 'Sathvik Putta',
       avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=64&h=64&fit=crop&crop=faces'
     },
     startDate: '2026-11-15',
     targetDate: '2026-11-18',
-    iteration: 'Iteration 1',
+    iteration: 'Sprint 1',
     labels: ['ci/cd', 'infrastructure'],
     estimate: 3
   },
@@ -44,13 +45,14 @@ export const initialItems: ProjectItem[] = [
     status: 'In Progress',
     priority: 'Urgent',
     type: 'issue',
+    epic: 'Agile Project Platform',
     assignee: {
       name: 'Sathvik Putta',
       avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=64&h=64&fit=crop&crop=faces'
     },
     startDate: '2026-11-19',
     targetDate: '2026-11-26',
-    iteration: 'Iteration 1',
+    iteration: 'Sprint 1',
     labels: ['frontend', 'feature', 'views'],
     estimate: 5
   },
@@ -60,15 +62,16 @@ export const initialItems: ProjectItem[] = [
     status: 'In Review',
     priority: 'High',
     type: 'pull_request',
+    epic: 'Agile Project Platform',
     assignee: {
       name: 'Alex Rivera',
       avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=64&h=64&fit=crop&crop=faces'
     },
     startDate: '2026-11-20',
     targetDate: '2026-11-24',
-    iteration: 'Iteration 1',
+    iteration: 'Sprint 1',
     labels: ['kanban', 'ux'],
-    estimate: 4
+    estimate: 5
   },
   {
     id: 'GV-104',
@@ -76,45 +79,48 @@ export const initialItems: ProjectItem[] = [
     status: 'In Progress',
     priority: 'Medium',
     type: 'issue',
+    epic: 'Agile Project Platform',
     assignee: {
       name: 'Elena Rostova',
       avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&fit=crop&crop=faces'
     },
     startDate: '2026-11-22',
     targetDate: '2026-11-29',
-    iteration: 'Iteration 2',
+    iteration: 'Sprint 1',
     labels: ['design', 'roadmap'],
     estimate: 3
   },
   {
     id: 'GV-105',
     title: 'Support custom field filtering and search queries',
-    status: 'Todo',
+    status: 'Backlog',
     priority: 'Medium',
     type: 'issue',
+    epic: 'Agile Project Platform',
     assignee: {
       name: 'Elena Rostova',
       avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&fit=crop&crop=faces'
     },
     startDate: '2026-11-26',
     targetDate: '2026-12-03',
-    iteration: 'Iteration 2',
+    iteration: 'Sprint 2',
     labels: ['filter', 'search'],
     estimate: 2
   },
   {
     id: 'GV-106',
     title: 'Draft: Research Atlassian Jira & Confluence two-way sync',
-    status: 'Todo',
+    status: 'Icebox',
     priority: 'Low',
     type: 'draft',
+    epic: 'Integrations & Ecosystem',
     assignee: {
       name: 'Alex Rivera',
       avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=64&h=64&fit=crop&crop=faces'
     },
     startDate: '2026-11-28',
     targetDate: '2026-12-05',
-    iteration: 'Iteration 2',
+    iteration: 'Sprint 2',
     labels: ['research', 'integrations'],
     estimate: 1
   }
