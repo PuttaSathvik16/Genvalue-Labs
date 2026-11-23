@@ -14,10 +14,14 @@
 
     if (!navBar) return;
 
-    // Find Pull requests tab to inject immediately after it (exact ZenHub position)
-    const pullRequestsTab = 
-      navBar.querySelector('a[href*="/pulls"]')?.closest('li') ||
-      navBar.querySelector('li:nth-child(3)');
+    // Find Actions tab or Projects tab to place in between Actions and Projects
+    const actionsTab = 
+      navBar.querySelector('a[href*="/actions"]')?.closest('li') ||
+      navBar.querySelector('a[data-tab-item*="actions"]')?.closest('li');
+
+    const projectsTab = 
+      navBar.querySelector('a[href*="/projects"]')?.closest('li') ||
+      navBar.querySelector('a[data-tab-item*="projects"]')?.closest('li');
 
     // Create GV Agile Tab Element
     const tabItem = document.createElement('li');
@@ -42,8 +46,11 @@
       <span class="Counter" style="background-color: rgba(247, 129, 102, 0.2); color: #f78166; font-weight: bold; border-radius: 2em; padding: 0 6px; font-size: 11px;">PRO</span>
     `;
 
-    if (pullRequestsTab && pullRequestsTab.nextSibling) {
-      navBar.insertBefore(tabItem, pullRequestsTab.nextSibling);
+    // Insert between Actions and Projects
+    if (projectsTab) {
+      navBar.insertBefore(tabItem, projectsTab);
+    } else if (actionsTab && actionsTab.nextSibling) {
+      navBar.insertBefore(tabItem, actionsTab.nextSibling);
     } else {
       navBar.appendChild(tabItem);
     }
