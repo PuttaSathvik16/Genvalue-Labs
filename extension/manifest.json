@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "GV Agile for GitHub",
+  "version": "1.0.0",
+  "description": "Injects the native GV Agile Kanban and Sprint Planning tab directly into GitHub's repository navigation bar for GenValue Labs.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://github.com/genvaluelabs-a11y/Genvalue-Labs*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/genvaluelabs-a11y/Genvalue-Labs*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
