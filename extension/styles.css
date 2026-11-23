@@ -1,18 +1,73 @@
-/* GV Agile Tab Styles matching GitHub Primer Design System */
+/* GV Agile Tab Styles matching GitHub Primer Design System in both Light & Dark themes */
+
 .gv-agile-tab-item {
   display: inline-flex !important;
-  align-items: center;
+  align-items: center !important;
 }
 
-#gv-agile-repo-tab a.UnderlineNav-item {
-  transition: background-color 0.15s ease, color 0.15s ease;
-}
-
-#gv-agile-repo-tab a.UnderlineNav-item:hover {
-  background-color: rgba(177, 186, 196, 0.12);
+#gv-agile-repo-tab .gv-agile-tab-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  text-decoration: none !important;
+  outline: none !important;
   border-radius: 6px;
+  cursor: pointer;
+  padding: 8px 8px !important;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
-#gv-agile-repo-tab a.UnderlineNav-item .Counter {
-  border: 1px solid rgba(247, 129, 102, 0.4);
+/* Remove default browser focus outline ring */
+#gv-agile-repo-tab .gv-agile-tab-link:focus,
+#gv-agile-repo-tab .gv-agile-tab-link:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Text styling adapting to light & dark theme */
+#gv-agile-repo-tab .gv-agile-text {
+  font-weight: 600 !important;
+  color: var(--fgColor-default, var(--color-fg-default, #1f2328)) !important;
+  font-size: 14px !important;
+  line-height: 21px !important;
+}
+
+/* Zap icon in orange / amber */
+#gv-agile-repo-tab .gv-agile-icon {
+  color: #d29922 !important;
+  vertical-align: text-bottom !important;
+  flex-shrink: 0;
+}
+
+/* Badge styling for PRO */
+#gv-agile-repo-tab .gv-agile-badge {
+  background-color: rgba(209, 154, 34, 0.15) !important;
+  color: #9e6a03 !important;
+  border: 1px solid rgba(209, 154, 34, 0.35) !important;
+  font-weight: 700 !important;
+  font-size: 10px !important;
+  padding: 0 5px !important;
+  border-radius: 2em !important;
+  line-height: 16px !important;
+}
+
+/* Dark mode specific overrides */
+[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-text,
+[data-dark-theme] #gv-agile-repo-tab .gv-agile-text,
+html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-text {
+  color: #f0f6fc !important;
+}
+
+[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-icon,
+[data-dark-theme] #gv-agile-repo-tab .gv-agile-icon,
+html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-icon {
+  color: #f78166 !important;
+}
+
+[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-badge,
+[data-dark-theme] #gv-agile-repo-tab .gv-agile-badge,
+html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-badge {
+  background-color: rgba(247, 129, 102, 0.2) !important;
+  color: #f78166 !important;
+  border-color: rgba(247, 129, 102, 0.4) !important;
 }
