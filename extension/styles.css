@@ -11,39 +11,41 @@
   gap: 6px !important;
   text-decoration: none !important;
   outline: none !important;
-  border-radius: 6px;
+  border: none !important;
+  box-shadow: none !important;
   cursor: pointer;
-  padding: 8px 8px !important;
-  transition: color 0.15s ease, background-color 0.15s ease;
+  padding: 0 8px !important;
+  color: var(--fgColor-default, var(--color-fg-default, #1f2328)) !important;
 }
 
-/* Remove default browser focus outline ring */
 #gv-agile-repo-tab .gv-agile-tab-link:focus,
-#gv-agile-repo-tab .gv-agile-tab-link:focus-visible {
+#gv-agile-repo-tab .gv-agile-tab-link:focus-visible,
+#gv-agile-repo-tab .gv-agile-tab-link:active {
   outline: none !important;
   box-shadow: none !important;
+  border: none !important;
 }
 
-/* Text styling adapting to light & dark theme */
+/* Text styling: crisp dark in light mode, crisp white in dark mode */
 #gv-agile-repo-tab .gv-agile-text {
   font-weight: 600 !important;
-  color: var(--fgColor-default, var(--color-fg-default, #1f2328)) !important;
   font-size: 14px !important;
-  line-height: 21px !important;
+  color: var(--fgColor-default, var(--color-fg-default, #1f2328)) !important;
 }
 
-/* Zap icon in orange / amber */
+/* Zap icon in sharp amber/orange */
 #gv-agile-repo-tab .gv-agile-icon {
   color: #d29922 !important;
+  fill: #d29922 !important;
   vertical-align: text-bottom !important;
   flex-shrink: 0;
 }
 
-/* Badge styling for PRO */
+/* PRO Badge */
 #gv-agile-repo-tab .gv-agile-badge {
   background-color: rgba(209, 154, 34, 0.15) !important;
   color: #9e6a03 !important;
-  border: 1px solid rgba(209, 154, 34, 0.35) !important;
+  border: 1px solid rgba(209, 154, 34, 0.4) !important;
   font-weight: 700 !important;
   font-size: 10px !important;
   padding: 0 5px !important;
@@ -51,21 +53,21 @@
   line-height: 16px !important;
 }
 
-/* Dark mode specific overrides */
+/* Explicit dark mode detection */
 [data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-text,
-[data-dark-theme] #gv-agile-repo-tab .gv-agile-text,
-html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-text {
+[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-tab-link,
+html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-text,
+html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-tab-link {
   color: #f0f6fc !important;
 }
 
 [data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-icon,
-[data-dark-theme] #gv-agile-repo-tab .gv-agile-icon,
 html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-icon {
   color: #f78166 !important;
+  fill: #f78166 !important;
 }
 
 [data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-badge,
-[data-dark-theme] #gv-agile-repo-tab .gv-agile-badge,
 html[data-color-mode="dark"] #gv-agile-repo-tab .gv-agile-badge {
   background-color: rgba(247, 129, 102, 0.2) !important;
   color: #f78166 !important;

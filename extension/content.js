@@ -36,10 +36,10 @@
 
     // ZenHub-style Zap Icon + Native-adaptive text + Pro badge
     tabLink.innerHTML = `
-      <svg class="octicon octicon-zap gv-agile-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <svg class="octicon octicon-zap gv-agile-icon" width="16" height="16" viewBox="0 0 16 16" fill="#d29922" aria-hidden="true" style="color: #d29922; fill: #d29922; vertical-align: text-bottom; flex-shrink: 0;">
         <path d="M7.747.054a.75.75 0 0 1 .506.71v5.986h4.997a.75.75 0 0 1 .59 1.213l-7.25 9a.75.75 0 0 1-1.24-.766l1.32-5.433H2.25a.75.75 0 0 1-.59-1.213l6-7.5a.75.75 0 0 1 .087-.075Z"/>
       </svg>
-      <span class="gv-agile-text" data-content="GV Agile">GV Agile</span>
+      <span class="gv-agile-text" data-content="GV Agile" style="font-weight: 600; font-size: 14px;">GV Agile</span>
       <span class="Counter gv-agile-badge">PRO</span>
     `;
 
